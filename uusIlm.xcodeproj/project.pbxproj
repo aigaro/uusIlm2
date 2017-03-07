@@ -126,6 +126,7 @@
 				TargetAttributes = {
 					08EF81061E5E23920090547C = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = PW462M4A65;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -338,6 +339,7 @@
 			baseConfigurationReference = 9CED20FF9371AE777BCB4F81 /* Pods-uusIlm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PW462M4A65;
 				INFOPLIST_FILE = uusIlm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aikuhaiku.uusIlm;
@@ -351,6 +353,7 @@
 			baseConfigurationReference = F7F166FD8FB85ECDB35FBED5 /* Pods-uusIlm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PW462M4A65;
 				INFOPLIST_FILE = uusIlm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aikuhaiku.uusIlm;
