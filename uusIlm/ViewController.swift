@@ -98,20 +98,21 @@ class ViewController: UIViewController {
             
             self.windRange.text = "Tuule kiirus tänasel päeval on \(weather.arrayMin.max()!) kuni \(weather.arrayMax.max()!) m/s"
             
-            self.dayTemp.text = "Päev \(weather.tempMinDay) kuni \(weather.tempMaxDay) °C"
-            self.nightTemp.text = "Öö \(weather.tempMinNight) kuni \(weather.tempMaxNight) °C"
-            
             switch Int(weather.tempMaxDay) {
             case -100 ... -1:
                 self.dayText.text = "Päeval on külma miinus \(weather.weatherDict[weather.tempMinDay*(-1)]) kuni \(weather.weatherDict[weather.tempMaxDay*(-1)]) kraadi"
+                self.dayTemp.text = "Päeval külma \(weather.tempMinDay) kuni \(weather.tempMaxDay) °C"
             case 0:
                 self.dayText.text = "Päeval on külma miinus \(weather.weatherDict[weather.tempMinDay*(-1)]) kuni \(weather.weatherDict[weather.tempMaxDay]) kraadi"
+                self.dayTemp.text = "Päeval on külma \(weather.tempMinDay) kuni \(weather.tempMaxDay) °C"
             case 1...100:
                 switch Int(weather.tempMinDay) {
-                case -100...0:
+                case -100..<0:
                     self.dayText.text = "Päeval on külma miinus \(weather.weatherDict[abs(weather.tempMinDay)]) kuni pluss \(weather.weatherDict[weather.tempMaxDay]) kraadi"
+                    self.dayTemp.text = "Päeval on külma \(weather.tempMinDay) kuni \(weather.tempMaxDay) °C"
                 case 0...100:
                     self.dayText.text = "Päeval on sooja \(weather.weatherDict[abs(weather.tempMinDay)]) kuni \(weather.weatherDict[weather.tempMaxDay]) kraadi"
+                    self.dayTemp.text = "Päeval on sooja \(weather.tempMinDay) kuni \(weather.tempMaxDay) °C"
                 default:
                     return
                 }
@@ -122,14 +123,18 @@ class ViewController: UIViewController {
             switch Int(weather.tempMaxNight) {
             case -100 ... -1:
                 self.nightText.text = "Öösel on külma miinus \(weather.weatherDict[weather.tempMinNight*(-1)]) kuni \(weather.weatherDict[weather.tempMaxNight*(-1)]) kraadi"
+                self.nightTemp.text = "Öösel on külma \(weather.tempMinNight) kuni \(weather.tempMaxNight) °C"
             case 0:
                 self.nightText.text = "Öösel on külma miinus \(weather.weatherDict[weather.tempMinNight*(-1)]) kuni \(weather.weatherDict[weather.tempMaxNight]) kraadi"
+                self.nightTemp.text = "Öösel on külma \(weather.tempMinNight) kuni \(weather.tempMaxNight) °C"
             case 1...100:
                 switch Int(weather.tempMinNight) {
-                case -100...0:
+                case -100..<0:
                     self.nightText.text = "Öösel on külma miinus \(weather.weatherDict[abs(weather.tempMinNight)]) kuni pluss \(weather.weatherDict[weather.tempMaxNight]) kraadi"
+                    self.nightTemp.text = "Öösel on külma \(weather.tempMinNight) kuni \(weather.tempMaxNight) °C"
                 case 0...100:
                     self.nightText.text = "Öösel on sooja \(weather.weatherDict[weather.tempMinNight]) kuni \(weather.weatherDict[weather.tempMaxNight]) kraadi"
+                    self.nightTemp.text = "Öösel on sooja \(weather.tempMinNight) kuni \(weather.tempMaxNight) °C"
                 default:
                     return
                 }
