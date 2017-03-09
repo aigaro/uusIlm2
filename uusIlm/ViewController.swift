@@ -12,23 +12,8 @@ import SWXMLHash
 var weather = WeatherData()
 var date = 0
 
-
-
-
 class ViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        weatherData()
-        date1Button.layer.backgroundColor = UIColor.lightGray.cgColor
-        windRange.isHidden = false
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-        // Dispose of any resources that can be recreated.
-    }
     @IBOutlet weak var dayTemp: UILabel!
     @IBOutlet weak var nightTemp: UILabel!
     @IBOutlet weak var dayText: UILabel!
@@ -40,6 +25,25 @@ class ViewController: UIViewController {
     @IBOutlet weak var date2Button: UIButton!
     @IBOutlet weak var date3Button: UIButton!
     @IBOutlet weak var date4Button: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        weatherData()
+        date1Button.layer.backgroundColor = UIColor.lightGray.cgColor
+        windRange.isHidden = false
+        
+        for button in [date1Button, date2Button, date3Button, date4Button] {
+            button?.layer.borderWidth = 1
+            button?.layer.borderColor = UIColor.lightGray.cgColor
+        }
+        
+        for layer in [dayTemp, nightTemp, dayText, nightText, descriptionDay, descriptionNight, windRange] {
+            layer?.layer.borderWidth = 1
+            
+        }
+        
+    }
     
     @IBAction func buttonPress(_ sender: UIButton) {
         
@@ -77,13 +81,9 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    
     func weatherData() {
-        
-        Alamofire.request("https://www.ilmateenistus.ee/ilma_andmed/xml/forecast.php").responseString { response in
+            Alamofire.request("https://www.ilmateenistus.ee/ilma_andmed/xml/forecast.php").responseString { response in
             let xmltest = SWXMLHash.parse(response.data!)
-            
             
             guard abs(weather.tempMinDay) < 41 && abs(weather.tempMaxDay) < 41 && abs(weather.tempMinNight) < 41 && abs(weather.tempMaxNight) < 41 else {return}
             
@@ -168,20 +168,5 @@ class ViewController: UIViewController {
             self.descriptionDay.text = "Päev. \(weather.weatherTextDay)"
             self.descriptionNight.text = "Öö. \(weather.weatherTextNight)"
         }
-        
-        for button in [date1Button, date2Button, date3Button, date4Button] {
-            button?.layer.borderWidth = 1
-            button?.layer.borderColor = UIColor.lightGray.cgColor
-        }
-        
-        for layer in [dayTemp, nightTemp, dayText, nightText, descriptionDay, descriptionNight, windRange] {
-            layer?.layer.borderWidth = 1
-            
-        }
-        
-        
     }
-    
-    
-    
 }
