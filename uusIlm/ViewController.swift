@@ -77,6 +77,8 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    
     func weatherData() {
         
         Alamofire.request("https://www.ilmateenistus.ee/ilma_andmed/xml/forecast.php").responseString { response in
@@ -97,10 +99,22 @@ class ViewController: UIViewController {
                 weather.chosenDate.append(xmltest["forecasts"]["forecast"][i].element!.attribute(by: "date")!.text)
             }
             
-            self.date1Button.setTitle(weather.chosenDate[0], for: .normal)
-            self.date2Button.setTitle(weather.chosenDate[1], for: .normal)
-            self.date3Button.setTitle(weather.chosenDate[2], for: .normal)
-            self.date4Button.setTitle(weather.chosenDate[3], for: .normal)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date1 = formatter.date(from: weather.chosenDate[0])
+            let date2 = formatter.date(from: weather.chosenDate[1])
+            let date3 = formatter.date(from: weather.chosenDate[2])
+            let date4 = formatter.date(from: weather.chosenDate[3])
+            formatter.dateStyle = .medium
+            let date1a = formatter.string(from: date1!)
+            let date2a = formatter.string(from: date2!)
+            let date3a = formatter.string(from: date3!)
+            let date4a = formatter.string(from: date4!)
+            
+            self.date1Button.setTitle(date1a, for: .normal)
+            self.date2Button.setTitle(date2a, for: .normal)
+            self.date3Button.setTitle(date3a, for: .normal)
+            self.date4Button.setTitle(date4a, for: .normal)
             
             for elem in xmltest["forecasts"]["forecast"][0]["day"]["wind"] {weather.arrayMin.append(Int( elem["speedmin"].element!.text! )!) }
             for elem in xmltest["forecasts"]["forecast"][0]["day"]["wind"] {weather.arrayMax.append(Int(elem["speedmax"].element!.text! )!) }
