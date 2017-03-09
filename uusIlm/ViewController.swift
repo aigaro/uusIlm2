@@ -14,12 +14,14 @@ var date = 0
 
 
 
+
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         weatherData()
         date1Button.layer.backgroundColor = UIColor.lightGray.cgColor
+        windRange.isHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,18 +49,22 @@ class ViewController: UIViewController {
             reset_bg_color()
             //button?.layer.borderColor = UIColor.lightGray.cgColor
             date1Button.layer.backgroundColor = UIColor.lightGray.cgColor
+            windRange.isHidden = false
         case 1:
             date = 1
             reset_bg_color()
             date2Button.layer.backgroundColor = UIColor.lightGray.cgColor
+            windRange.isHidden = true
         case 2:
             date = 2
             reset_bg_color()
             date3Button.layer.backgroundColor = UIColor.lightGray.cgColor
+            windRange.isHidden = true
         case 3:
             date = 3
             reset_bg_color()
             date4Button.layer.backgroundColor = UIColor.lightGray.cgColor
+            windRange.isHidden = true
         default:
             return
         }
@@ -75,6 +81,9 @@ class ViewController: UIViewController {
         
         Alamofire.request("https://www.ilmateenistus.ee/ilma_andmed/xml/forecast.php").responseString { response in
             let xmltest = SWXMLHash.parse(response.data!)
+            
+            
+            guard abs(weather.tempMinDay) < 41 && abs(weather.tempMaxDay) < 41 && abs(weather.tempMinNight) < 41 && abs(weather.tempMaxNight) < 41 else {return}
             
             weather.tempMinDay = Int(xmltest["forecasts"]["forecast"][date]["day"]["tempmin"].element!.text!)!
             weather.tempMaxDay = Int(xmltest["forecasts"]["forecast"][date]["day"]["tempmax"].element!.text!)!
